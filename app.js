@@ -82,26 +82,26 @@
 
 //transfer event
 
-const Web3 = require('web3')  //acquiring web 3 library
-const web3 = new Web3('https://mainnet.infura.io/v3/17b4ad0be7ab4342a9c3f992ce6162ee') //remote ethereum node
-const abi = [{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"},{"name":"_releaseTime","type":"uint256"}],"name":"mintTimelocked","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}];   //json representation of everything that a contract can response to
-const address = '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07'
-const contract = new web3.eth.Contract(abi,address)  //using contract part of web 3
-//getting  connection to smart contract in blcok chain
+// const Web3 = require('web3')  //acquiring web 3 library
+// const web3 = new Web3('https://mainnet.infura.io/v3/17b4ad0be7ab4342a9c3f992ce6162ee') //remote ethereum node
+// const abi = [{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"},{"name":"_releaseTime","type":"uint256"}],"name":"mintTimelocked","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}];   //json representation of everything that a contract can response to
+// const address = '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07'
+// const contract = new web3.eth.Contract(abi,address)  //using contract part of web 3
+// //getting  connection to smart contract in blcok chain
 
-contract.getPastEvents(
-                      'Transfer',
-                       {
-                           fromBlock:9472856,
-                           toBlock:'latest'
-                        },
-                        (err,events)=>{
-                            if(err){
-                                console.log(err)
-                            }else{
-                                console.log(events.length)
-                            }
-                        })
+// contract.getPastEvents(
+//                       'Transfer',
+//                        {
+//                            fromBlock:9472856,
+//                            toBlock:'latest'
+//                         },
+//                         (err,events)=>{
+//                             if(err){
+//                                 console.log(err)
+//                             }else{
+//                                 console.log(events.length)
+//                             }
+//                         })
 //console.log(contract)
 //get some events from 
 // {
@@ -132,3 +132,46 @@ contract.getPastEvents(
 //       ]
 //     }
 //   }
+
+
+const Web3 = require('web3')  //acquiring web 3 library
+const web3 = new Web3('https://mainnet.infura.io/v3/17b4ad0be7ab4342a9c3f992ce6162ee') //remote ethereum node or passing in ethereum node url
+
+
+//web3.eth.getBlockNumber().then(console.log)  // getting block number
+//web3.eth.getBlock('latest').then(console.log)  //getting latset block
+// web3.eth.getBlock('latest').then((block)=>{
+//     console.log({
+//         blockhash: block.hash,
+//         blockNumber: block.number
+//     })
+// })
+
+
+//get latest 10 blocks
+
+// web3.eth.getBlockNumber().then((latest)=>{
+//     for(let i = 0; i<1;i++){
+//         web3.eth.getBlock(latest - i).then((block)=>{
+//         console.log(block.hash)//same with block.number
+//         })
+//     }
+// })
+
+//web3.eth.getBlockTransactionCount('latest').then(console.log)//gives trnsaction count
+//web3.eth.getBlockNumber().then((latest)=>{console.log(latest.hash)})
+
+// const hash='0xf80d61eda382a5a1dbc6e21cf3b7984b7575c149e74c1512637fbafb7f63c763'
+// web3.eth.getTransactionFromBlock(hash,2).then(console.log)   //gives the transaction from the hash of the block given above
+
+web3.eth.getGasPrice().then((result)=>{
+    console.log(web3.utils.fromWei(result,'ether'))
+})
+//console.log(web3.utils.sha3('123'))
+//console.log(web3.utils.soliditySha3('123'))
+console.log(web3.utils.randomHex(123))
+
+const _ = web3.utils._
+_.each({key1:'value1',key2:'value2'},(value,key)=>{
+    console.log(key)
+})
